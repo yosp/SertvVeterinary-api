@@ -1,0 +1,20 @@
+2016-10-11T15:57:37.205625000 40.343012s notice: Recursively removing directory /Users/yeisonsegura/Documents/Projects/Node Projects/SertvVeterinary-api/rethinkdb_data/tmp
+2016-10-11T15:57:37.209846000 40.347245s notice: Initializing directory /Users/yeisonsegura/Documents/Projects/Node Projects/SertvVeterinary-api/rethinkdb_data
+2016-10-11T15:57:37.210040000 40.347427s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/Users/yeisonsegura/Documents/Projects/Node Projects/SertvVeterinary-api/rethinkdb_data' did not already exist or is empty.)
+2016-10-11T15:57:37.210191000 40.347578s notice: Running rethinkdb 2.3.5 (CLANG 7.3.0 (clang-703.0.31))...
+2016-10-11T15:57:37.216939000 40.354326s notice: Running on Darwin 16.0.0 x86_64
+2016-10-11T15:57:37.216980000 40.354366s notice: Loading data from directory /Users/yeisonsegura/Documents/Projects/Node Projects/SertvVeterinary-api/rethinkdb_data
+2016-10-11T15:57:37.287315000 40.424702s info: Automatically using cache size of 2415 MB
+2016-10-11T15:57:37.287804000 40.425190s notice: Listening for intracluster connections on port 29015
+2016-10-11T15:57:37.290091000 40.427477s notice: Listening for client driver connections on port 28015
+2016-10-11T15:57:37.290208000 40.427594s notice: Listening for administrative HTTP connections on port 8080
+2016-10-11T15:57:37.290210000 40.427596s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2016-10-11T15:57:37.290213000 40.427599s notice: Listening on driver addresses: 127.0.0.1, ::1
+2016-10-11T15:57:37.290216000 40.427602s notice: Listening on http addresses: 127.0.0.1, ::1
+2016-10-11T15:57:37.290220000 40.427606s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2016-10-11T15:57:37.290223000 40.427609s notice: Server ready, "Yeisons_MacBook_Pro_local_yw9" de68f1a2-b8d7-4d60-9d19-65ca6b975444
+2016-10-11T16:18:01.915518000 1265.107851s notice: Server got SIGINT from pid 5387, uid 501; shutting down...
+2016-10-11T16:18:01.915772000 1265.108104s notice: Shutting down client connections...
+2016-10-11T16:18:01.915882000 1265.108214s notice: All client connections closed.
+2016-10-11T16:18:01.915888000 1265.108220s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2016-10-11T16:18:01.918352000 1265.110685s notice: Storage engine shut down.
