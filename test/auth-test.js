@@ -1,6 +1,6 @@
 'use strict'
 
-import { send, json} from 'micro'
+import {send, json} from 'micro'
 import HttpHash from 'http-hash'
 import Db from 'sertvveterinary-db'
 import config from './config'
@@ -10,8 +10,8 @@ import DbStub from './test/stub/db'
 const env = process.env.NODE_ENV || 'production'
 let db = new Db(config.db)
 
-if(env == 'test'){
-	db = new DbStub()
+if (env === 'test') {
+  db = new DbStub()
 }
 
 let hash = HttpHash()
@@ -47,4 +47,3 @@ export default async function main (req, res) {
     send(res, 404, { error: 'route not found' })
   }
 }
-

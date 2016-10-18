@@ -2,15 +2,18 @@
   "name": "sertvveterinary-api",
   "version": "1.0.0",
   "description": "api manager for macro-project sertv",
-  "main": "index.js",
   "scripts": {
     "lint": "standard",
-    "test": "npm run lint && NODE_ENV=test ava --require babel-register test/**-test.js",
+    "test": "NODE_ENV = test && npm run lint NODE_ENV=test ava --require babel-register test/**-test.js",
     "pictures": "micro -p 5000 pictures.js",
     "users": "micro -p 5001 users.js",
     "auth": "micro -p 5002 auth.js"
   },
   "standard": {
+    "ignore": [
+    "/client.js",
+    "/auth.js"
+    ],
     "parser": "babel-eslint"
   },
   "babel": {
