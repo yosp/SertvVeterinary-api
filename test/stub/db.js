@@ -1,6 +1,6 @@
 'use strict'
 
-import fixtures from './fixtures'
+import fixtures from '../fixtures/'
 
 export default class Db {
   connect () {

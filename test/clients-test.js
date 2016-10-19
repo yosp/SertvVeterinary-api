@@ -2,8 +2,8 @@ import test from 'ava'
 import micro from 'micro'
 import listen from 'test-listen'
 import request from 'request-promise'
-import clients from '../clients'
-import fixtures from './fixtures'
+import clients from '../client'
+import fixtures from './fixtures/'
 
 test.beforeEach(async t => {
   let srv = micro(clients)

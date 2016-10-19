@@ -4,7 +4,7 @@
   "description": "api manager for macro-project sertv",
   "scripts": {
     "lint": "standard",
-    "test": "NODE_ENV = test && npm run lint NODE_ENV=test ava --require babel-register test/**-test.js",
+    "test": "npm run lint && NODE_ENV=test ava --require babel-register test/**-test.js",
     "pictures": "micro -p 5000 pictures.js",
     "users": "micro -p 5001 users.js",
     "auth": "micro -p 5002 auth.js"

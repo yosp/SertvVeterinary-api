@@ -4,7 +4,7 @@ import HttpHash from 'http-hash'
 import {send} from 'micro'
 import Db from 'sertvveterinary-db'
 import config from './config'
-import DbStub from '.test/stub/db'
+import DbStub from './test/stub/db'
 
 const env = process.env.NODE_ENV || 'produccion'
 let db = new Db(config.db)
