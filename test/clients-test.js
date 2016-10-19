@@ -4,6 +4,8 @@ import listen from 'test-listen'
 import request from 'request-promise'
 import clients from '../client'
 import fixtures from './fixtures'
+import utils from '../lib/utils'
+import config from '../config'
 
 test.beforeEach(async t => {
   let srv = micro(clients)
@@ -41,7 +43,7 @@ test('client:email', async t => {
 test('POST /createClient', async t => {
   let client = fixtures.getClients()
   let url = t.context.url
-
+  let token = await utils.sing({clientId: client.id}, config.secret)
   let options = {
     method: 'POST',
     uri: url,
@@ -54,6 +56,9 @@ test('POST /createClient', async t => {
       email: client.email,
       phone: client.phone,
       phone2: client.phone2
+    },
+    headers: {
+      'Autorization':`Bearer ${token}`
     },
     resolveWithFullResponse: true
 

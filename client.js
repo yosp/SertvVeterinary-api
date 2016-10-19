@@ -5,6 +5,7 @@ import { send, json } from 'micro'
 import Db from 'sertvveterinary-db'
 import config from './config'
 import DbStub from './test/stub/db'
+import utils from './lib/utils'
 
 const env = process.env.NODE_ENV || 'produccion'
 let db = new Db(config.db)
@@ -48,6 +49,17 @@ hash.set('GET /byEmail/:email', async function getClientByEmail (req, res, param
 
 hash.set('POST /', async function saveClient (req, res, param) {
   let client = await json(req)
+
+  try {
+    let token = await utils.extractToken(req)
+    let enconde = await utils.veryfyToken(token, config.secret)
+    if (enconde && enconde.clientid != client.id) {
+        throw new Error('invalid Token')
+    }
+  } catch (e) {
+    send(res, 401, {message: 'invalid Token'})
+  }
+
   await db.connect
   let created = await db.saveClient(client)
   await db.disconnect()
@@ -56,6 +68,17 @@ hash.set('POST /', async function saveClient (req, res, param) {
 
 hash.set('POST /updateClient', async function updateClient (req, res, param) {
   let client = await json(req)
+
+  try {
+    let token = await utils.extractToken(req)
+    let enconde = await utils.veryfyToken(token, config.secret)
+    if (enconde && enconde.clientid != client.id) {
+      throw new Error('invalid Token')
+    }
+  } catch (e) {
+    send(res, 401, {message: 'invalid Token'})
+  }
+
   await db.connect
   let updated = await db.updateClient(client)
   await db.disconnect()

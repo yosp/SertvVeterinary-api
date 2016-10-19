@@ -38,4 +38,14 @@ export default class Db {
     client.phone = '809-414-8434'
     return Promise.resolve(client)
   }
+
+  saveNewUser (user) {
+    return Promise.resolve(fixtures.getUser())
+  }
+
+  updateUser (user) {
+    user = fixtures.getUser()
+    user.password = 'Tinton1212'
+    return Promise.resolve(user)
+  }
 }
