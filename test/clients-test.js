@@ -3,7 +3,7 @@ import micro from 'micro'
 import listen from 'test-listen'
 import request from 'request-promise'
 import clients from '../client'
-import fixtures from './fixtures/'
+import fixtures from './fixtures'
 
 test.beforeEach(async t => {
   let srv = micro(clients)
@@ -13,29 +13,29 @@ test.beforeEach(async t => {
 test('GET /clientList', async t => {
   let clients = fixtures.getClients()
   let url = t.context.url
-  let body = await request({uri: `${url}/`, json: true})
+  let body = await request({uri: `${url}/clientList`, json: true})
   t.deepEqual(body, clients)
 })
 
-test('client:id', async t => {
+test('GET /client/:id', async t => {
   let client = fixtures.getClients()
   let url = t.context.url
   let body = await request({uri: `${url}/${client.id}`, json: true})
-  t.deepEqual(body, clients)
+  t.deepEqual(body, client)
 })
 
-test('client:phone', async t => {
+test('GET /client/:phone', async t => {
   let client = fixtures.getClients()
   let url = t.context.url
-  let body = await request({uri: `${url}/${client.phone}`, json: true})
-  t.deepEqual(body, clients)
+  let body = await request({uri: `${url}/byPhone/${client.phone}`, json: true})
+  t.deepEqual(body, client)
 })
 
 test('client:email', async t => {
   let client = fixtures.getClients()
   let url = t.context.url
-  let body = await request({uri: `${url}/${client.email}`, json: true})
-  t.deepEqual(body, clients)
+  let body = await request({uri: `${url}/byEmail/${client.email}`, json: true})
+  t.deepEqual(body, client)
 })
 
 test('POST /createClient', async t => {
@@ -73,7 +73,7 @@ test('POST /updateClient', async t => {
 
   let options = {
     method: 'POST',
-    uri: url,
+    uri: `${url}/updateClient`,
     json: true,
     body: {
       id: client.id,

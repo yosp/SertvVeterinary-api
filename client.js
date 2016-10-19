@@ -22,7 +22,7 @@ hash.set('GET /clientList', async function getClients (req, res, param) {
   send(res, 200, clients)
 })
 
-hash.set('GET /client:id' async function getClient (req, res, param) {
+hash.set('GET /:id', async function getClient (req, res, param) {
   let id = param.id
   await db.connect()
   let client = await db.getClient(id)
@@ -30,7 +30,7 @@ hash.set('GET /client:id' async function getClient (req, res, param) {
   send(res, 200, client)
 })
 
-hash.set('GET /client:phone' async function getClientByPhone (req, res, param) {
+hash.set('GET /byPhone/:phone', async function getClientByPhone (req, res, param) {
   let phone = param.phone
   await db.connect()
   let client = await db.getClientByPhone(phone)
@@ -38,7 +38,7 @@ hash.set('GET /client:phone' async function getClientByPhone (req, res, param) {
   send(res, 200, client)
 })
 
-hash.set('GET /client:email' async function getClientByEmail (req, res, param) {
+hash.set('GET /byEmail/:email', async function getClientByEmail (req, res, param) {
   let email = param.email
   await db.connect()
   let client = await db.getClientByEmail(email)
@@ -46,7 +46,7 @@ hash.set('GET /client:email' async function getClientByEmail (req, res, param) {
   send(res, 200, client)
 })
 
-hash.set('POST /createClient', async function saveClient (req, res, param) {
+hash.set('POST /', async function saveClient (req, res, param) {
   let client = await json(req)
   await db.connect
   let created = await db.saveClient(client)
@@ -59,23 +59,21 @@ hash.set('POST /updateClient', async function updateClient (req, res, param) {
   await db.connect
   let updated = await db.updateClient(client)
   await db.disconnect()
-  send(res, 200, updated)
+  send(res, 201, updated)
 })
 
 
 export default async function main (req, res) {
-  let {method, url} = req
+  let { method, url } = req
   let match = hash.get(`${method.toUpperCase()} ${url}`)
 
   if (match.handler) {
     try {
-      await match.handler(req, res, match.param)
+      await match.handler(req, res, match.params)
+    } catch (e) {
+      send(res, 500, { error: e.message })
     }
-    catch (e) {
-      send(res, 500, {error: e.message})
-    }
-  }
-  else {
-    send(res, 404, {error: 'route not foud'})
+  } else {
+    send(res, 404, { error: 'route not found' })
   }
 }

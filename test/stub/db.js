@@ -12,24 +12,30 @@ export default class Db {
   }
 
   getClientList () {
-    return Promise.resolve(fixtures.getClients())
-  }
-
-  saveClient () {
-    return Promise.resolve(fixtures.getClients())
-  }
-
-  getClientByPhone () {
-    return Promise.resolve(fixtures.getClients())
-  }
-
-  getClientByEmail () {
-    return Promise.resolve(fixtures.getClients())
-  }
-
-  updateClient () {
     let client = fixtures.getClients()
-    client.phone = '809-414-8434'
+    return Promise.resolve(client)
+  }
+
+  getClient (id) {
+    let client = fixtures.getClients()
+    return Promise.resolve(client)
+  }
+
+  saveClient (client) {
     return Promise.resolve(fixtures.getClients())
+  }
+
+  getClientByPhone (phone) {
+    return Promise.resolve(fixtures.getClients())
+  }
+
+  getClientByEmail (email) {
+    return Promise.resolve(fixtures.getClients())
+  }
+
+  updateClient (client) {
+    client = fixtures.getClients()
+    client.phone = '809-414-8434'
+    return Promise.resolve(client)
   }
 }
