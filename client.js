@@ -1,7 +1,7 @@
 'use strict'
 
 import HttpHash from 'http-hash'
-import {send} from 'micro'
+import { send, json } from 'micro'
 import Db from 'sertvveterinary-db'
 import config from './config'
 import DbStub from './test/stub/db'
@@ -15,12 +15,53 @@ if (env === 'test') {
 
 const hash = HttpHash()
 
-hash.set('GET /', async function getClients (req, res, param) {
+hash.set('GET /clientList', async function getClients (req, res, param) {
   await db.connect()
   let clients = await db.getClientList()
   await db.disconnect()
   send(res, 200, clients)
 })
+
+hash.set('GET /client:id' async function getClient (req, res, param) {
+  let id = param.id
+  await db.connect()
+  let client = await db.getClient(id)
+  await db.disconnect()
+  send(res, 200, client)
+})
+
+hash.set('GET /client:phone' async function getClientByPhone (req, res, param) {
+  let phone = param.phone
+  await db.connect()
+  let client = await db.getClientByPhone(phone)
+  await db.disconnect()
+  send(res, 200, client)
+})
+
+hash.set('GET /client:email' async function getClientByEmail (req, res, param) {
+  let email = param.email
+  await db.connect()
+  let client = await db.getClientByEmail(email)
+  await db.disconnect()
+  send(res, 200, client)
+})
+
+hash.set('POST /createClient', async function saveClient (req, res, param) {
+  let client = await json(req)
+  await db.connect
+  let created = await db.saveClient(client)
+  await db.disconnect()
+  send(res, 201, created)
+})
+
+hash.set('POST /updateClient', async function updateClient (req, res, param) {
+  let client = await json(req)
+  await db.connect
+  let updated = await db.updateClient(client)
+  await db.disconnect()
+  send(res, 200, updated)
+})
+
 
 export default async function main (req, res) {
   let {method, url} = req
