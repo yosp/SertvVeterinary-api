@@ -48,4 +48,8 @@ export default class Db {
     user.password = 'Tinton1212'
     return Promise.resolve(user)
   }
+
+  authenticate () {
+    return Promise.resolve(true)
+  }
 }

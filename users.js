@@ -5,6 +5,7 @@ import { send, json } from 'micro'
 import Db from 'sertvveterinary-db'
 import config from './config'
 import DbStub from './test/stub/db'
+import utils from './lib/utils'
 
 const env = process.env.NODE_ENV || 'produccion'
 let db = new Db(config.db)
@@ -21,7 +22,7 @@ hash.set('POST /', async function saveUser (req, res, params) {
   try {
     let token = await utils.extractToken(req)
     let enconde = await utils.veryfyToken(token, config.secret)
-    if (enconde && enconde.userId != user.id) {
+    if (enconde && enconde.userId !== user.id) {
       throw new Error('invalid Token')
     }
   } catch (e) {
@@ -42,21 +43,21 @@ hash('POST /update', async function updateUser (req, res, params) {
   try {
     let token = await utils.extractToken(req)
     let enconde = await utils.veryfyToken(token, config.secret)
-    if (enconde && enconde.userId != user.id) {
+    if (enconde && enconde.userId !== user.id) {
       throw new Error('invalid Token')
     }
   } catch (e) {
     send(res, 401, {message: 'invalid Token'})
   }
-  
+
   await db.connect()
-  let user = db.updateUser(user)
+  let updUser = db.updateUser(user)
   await db.disconnect()
 
-  delete user.password
-  delete user.email
+  delete updUser.password
+  delete updUser.email
 
-  send(res, 201, user)
+  send(res, 201, updUser)
 })
 
 export default async function main (req, res) {

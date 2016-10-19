@@ -58,7 +58,7 @@ test('POST /createClient', async t => {
       phone2: client.phone2
     },
     headers: {
-      'Autorization':`Bearer ${token}`
+      'Autorization': `Bearer ${token}`
     },
     resolveWithFullResponse: true
 
