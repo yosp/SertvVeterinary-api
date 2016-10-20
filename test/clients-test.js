@@ -33,7 +33,7 @@ test('GET /client/:phone', async t => {
   t.deepEqual(body, client)
 })
 
-test('client:email', async t => {
+test('GET /client:email', async t => {
   let client = fixtures.getClients()
   let url = t.context.url
   let body = await request({uri: `${url}/byEmail/${client.email}`, json: true})
@@ -43,7 +43,8 @@ test('client:email', async t => {
 test('POST /createClient', async t => {
   let client = fixtures.getClients()
   let url = t.context.url
-  let token = await utils.sing({clientId: client.id}, config.secret)
+  let token = await utils.signToken({clientId: client.id}, config.secret)
+
   let options = {
     method: 'POST',
     uri: url,
@@ -58,7 +59,7 @@ test('POST /createClient', async t => {
       phone2: client.phone2
     },
     headers: {
-      'Autorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`
     },
     resolveWithFullResponse: true
 
@@ -73,6 +74,7 @@ test('POST /createClient', async t => {
 test('POST /updateClient', async t => {
   let client = fixtures.getClients()
   let url = t.context.url
+  let token = await utils.signToken({clientId: client.id}, config.secret)
 
   client.phone = '809-414-8434'
 
@@ -88,6 +90,9 @@ test('POST /updateClient', async t => {
       email: client.email,
       phone: client.phone,
       phone2: client.phone2
+    },
+    headers: {
+      'Authorization': `Bearer ${token}`
     },
     resolveWithFullResponse: true
 

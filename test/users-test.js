@@ -4,6 +4,8 @@ import listen from 'test-listen'
 import request from 'request-promise'
 import users from '../users'
 import fixtures from './fixtures'
+import utils from '../lib/utils'
+import config from '../config'
 
 test.beforeEach(async t => {
   let srv = micro(users)
@@ -13,16 +15,21 @@ test.beforeEach(async t => {
 test('POST /', async t => {
   let user = fixtures.getUser()
   let url = t.context.url
+  let token = await utils.signToken({userId: user.id}, config.secret)
 
   let options = {
     method: 'POST',
     uri: url,
     json: true,
     body: {
+      id: user.id,
       username: user.username,
       fullname: user.fullname,
       password: user.password,
       email: user.email
+    },
+    headers: {
+      'Authorization': `Bearer ${token}`
     },
     resolveWithFullResponse: true
   }
@@ -32,32 +39,57 @@ test('POST /', async t => {
   delete user.email
   delete user.password
 
-  t.is(response.statusCode, 200)
+  t.is(response.statusCode, 201)
   t.deepEqual(response.body, user)
 })
 
-test('post /:username', async t => {
+test('post /update', async t => {
   let user = fixtures.getUser()
   let url = t.context.url
+  let token = await utils.signToken({userId: user.id}, config.secret)
 
   user.password = 'Tinton1212'
   let options = {
     method: 'POST',
-    uri: url,
+    uri: `${url}/update`,
     json: true,
     body: {
+      id: user.id,
       username: user.username,
       fullname: user.fullname,
       password: user.password,
-      email: user.email
+      email: user.email,
+      createdAt: user.createdAt
+    },
+    headers: {
+      'Authorization': `Bearer ${token}`
     },
     resolveWithFullResponse: true
   }
 
   let response = await request(options)
 
-  delete user.password
   delete user.email
+  delete user.password
 
-  t.deepEqual(response, user)
+  t.is(response.statusCode, 201)
+  t.deepEqual(response.body, user)
+})
+
+test('GET /:username', async t => {
+  let user = fixtures.getUser()
+  let url = t.context.url
+
+  let options = {
+    method: 'GET',
+    uri: `${url}/${user.username}`,
+    json: true
+  }
+
+  let body = await request(options)
+
+  delete user.email
+  delete user.password
+
+  t.is(body.username, user.username)
 })

@@ -4,6 +4,7 @@ import HttpHash from 'http-hash'
 import { send, json } from 'micro'
 import Db from 'sertvveterinary-db'
 import config from './config'
+import gravatar from 'gravatar'
 import DbStub from './test/stub/db'
 import utils from './lib/utils'
 
@@ -21,8 +22,8 @@ hash.set('POST /', async function saveUser (req, res, params) {
 
   try {
     let token = await utils.extractToken(req)
-    let enconde = await utils.veryfyToken(token, config.secret)
-    if (enconde && enconde.userId !== user.id) {
+    let encode = await utils.verifyToken(token, config.secret)
+    if (encode && encode.userId !== user.id) {
       throw new Error('invalid Token')
     }
   } catch (e) {
@@ -37,27 +38,36 @@ hash.set('POST /', async function saveUser (req, res, params) {
   send(res, 201, created)
 })
 
-hash('POST /update', async function updateUser (req, res, params) {
+hash.set('POST /update', async function updateUser (req, res, params) {
   let user = await json(req)
 
   try {
     let token = await utils.extractToken(req)
-    let enconde = await utils.veryfyToken(token, config.secret)
-    if (enconde && enconde.userId !== user.id) {
+    let encode = await utils.verifyToken(token, config.secret)
+    if (encode && encode.userId !== user.id) {
       throw new Error('invalid Token')
     }
   } catch (e) {
     send(res, 401, {message: 'invalid Token'})
   }
-
   await db.connect()
-  let updUser = db.updateUser(user)
+  let updUser = await db.updateUser(user)
   await db.disconnect()
-
   delete updUser.password
   delete updUser.email
-
   send(res, 201, updUser)
+})
+
+hash.set('GET /:username', async function getUser (req, res, params) {
+  let username = params.username
+  await db.connect()
+  let user = await db.getUser(username)
+  user.avatar = gravatar.url(user.email)
+
+  delete user.password
+  delete user.email
+
+  send(res, 200, user)
 })
 
 export default async function main (req, res) {

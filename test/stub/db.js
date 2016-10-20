@@ -43,6 +43,10 @@ export default class Db {
     return Promise.resolve(fixtures.getUser())
   }
 
+  getUser (user) {
+    return Promise.resolve(fixtures.getUser())
+  }
+
   updateUser (user) {
     user = fixtures.getUser()
     user.password = 'Tinton1212'

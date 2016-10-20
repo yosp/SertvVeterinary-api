@@ -51,9 +51,9 @@ hash.set('POST /', async function saveClient (req, res, param) {
   let client = await json(req)
 
   try {
-    let token = await utils.extractToken(req)
-    let enconde = await utils.veryfyToken(token, config.secret)
-    if (enconde && enconde.clientid != client.id) {
+    let token = await utils.extractToken(req) 
+    let encode = await utils.verifyToken(token, config.secret)
+    if (encode && encode.clientId != client.id) {
         throw new Error('invalid Token')
     }
   } catch (e) {
@@ -71,8 +71,8 @@ hash.set('POST /updateClient', async function updateClient (req, res, param) {
 
   try {
     let token = await utils.extractToken(req)
-    let enconde = await utils.veryfyToken(token, config.secret)
-    if (enconde && enconde.clientid != client.id) {
+    let enconde = await utils.verifyToken(token, config.secret)
+    if (enconde && enconde.clientId != client.id) {
       throw new Error('invalid Token')
     }
   } catch (e) {
@@ -84,7 +84,6 @@ hash.set('POST /updateClient', async function updateClient (req, res, param) {
   await db.disconnect()
   send(res, 201, updated)
 })
-
 
 export default async function main (req, res) {
   let { method, url } = req

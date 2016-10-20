@@ -27,7 +27,7 @@ test('success POST /', async t => {
   }
 
   let token = await request(options)
-  let decoder = await utils.veryfyToken(token, config.secret)
+  let decoder = await utils.verifyToken(token, config.secret)
 
   t.is(decoder.username, user.username)
 })
