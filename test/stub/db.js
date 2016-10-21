@@ -16,6 +16,20 @@ export default class Db {
     return Promise.resolve(client)
   }
 
+  getInternment () {
+    return Promise.resolve(fixtures.getIntern())
+  }
+
+  saveInternment () {
+    return Promise.resolve(fixtures.getIntern())
+  }
+
+  updateInternment (intern) {
+    intern = fixtures.getIntern()
+    intern.description = 'Changed'
+    return Promise.resolve(intern)
+  }
+
   getClient (id) {
     let client = fixtures.getClients()
     return Promise.resolve(client)

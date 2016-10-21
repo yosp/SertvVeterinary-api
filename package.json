@@ -12,7 +12,8 @@
   "standard": {
     "ignore": [
     "/client.js",
-    "/auth.js"
+    "/auth.js",
+    "/internment.js"
     ],
     "parser": "babel-eslint"
   },

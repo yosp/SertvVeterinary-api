@@ -7,7 +7,7 @@ import config from './config'
 import DbStub from './test/stub/db'
 import utils from './lib/utils'
 
-const env = process.env.NODE_ENV || 'produccion'
+const env = process.env.NODE_ENV || 'production'
 let db = new Db(config.db)
 
 if (env === 'test') {

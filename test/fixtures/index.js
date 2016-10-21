@@ -17,8 +17,16 @@ export default {
       username: 'ysegura',
       fullname: 'Yeison Segura',
       email: 'yeisp1011@gmail.com',
-      password: 'Tinton1234',
-      createdAt: new Date().toString()
+      password: 'Tinton1234'
+    }
+  },
+
+  getIntern () {
+    return {
+      id: '6a238b19-3ee3-4d5c-acb5-53432323234',
+      petid: '6a238b19-3ee3-4d5c-acb5-944a3c1fb407',
+      description: 'Pasiente con fiebre',
+      status: 'A'
     }
   }
 }
