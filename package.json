@@ -13,7 +13,8 @@
     "ignore": [
     "/client.js",
     "/auth.js",
-    "/internment.js"
+    "/internment.js",
+    "/interecord.js"
     ],
     "parser": "babel-eslint"
   },
