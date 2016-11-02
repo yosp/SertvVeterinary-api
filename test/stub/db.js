@@ -99,4 +99,18 @@ export default class Db {
     ethni.description = 'Dog 2'
     return Promise.resolve(ethni)
   }
+
+  saveLaboratory () {
+    return Promise.resolve(fixtures.getLab())
+  }
+
+  updateLaboratory () {
+    let lab = fixtures.getLab()
+    lab.description = 'Lab y'
+    return Promise.resolve(lab)
+  }
+
+  getLaboratorys () {
+    return Promise.resolve(fixtures.getLab())
+  }
 }
