@@ -12,56 +12,61 @@ test.beforeEach(async t => {
   t.context.url = await listen(srv)
 })
 
-test('GET /', async t => {
+test('GET /:internid', async t => {
+  let interecord = fixtures.getInteRecord()
   let url = t.context.url
-  let interR = fixtures.getInteRecord()
-  let body = await request({uri: url, json: true})
-  t.deepEqual(body, interR)
+  let body = await request({uri: `${url}/${interecord.internid}`, json: true})
+  t.deepEqual(body, interecord)
 })
 
 test('POST /', async t => {
+  let interecord = fixtures.getInteRecord()
   let url = t.context.url
-  let interR = fixtures.getInteRecord()
-  let token = await utils.signToken({interecordid: interR.id}, config.secret)
+  let token = await utils.signToken({intrecid: interecord.id}, config.secret)
   let options = {
+    method: 'POST',
     uri: url,
     json: true,
     body: {
-      description: interR.description,
-      medicineId: interR.medicineId,
-      appointid: interR.appointid
+      id: interecord.id,
+      medicineId: interecord.medicineId,
+      description: interecord.description,
+      internid: interecord.internid
     },
     headers: {
       'Authorization': `Bearer ${token}`
     },
-    ResolveWithFullResponse: true
+    resolveWithFullResponse: true
   }
-  let response = request(options)
 
-  t.deepEqual(interR, response.body)
+  let response = await request(options)
+
+  t.deepEqual(response.body, interecord)
   t.is(response.statusCode, 201)
 })
 
-test('POST /updateInterecord', async t => {
+test('POST /update', async t => {
+  let interecord = fixtures.getInteRecord()
   let url = t.context.url
-  let interR = fixtures.getInteRecord()
-  let token = await utils.signToken({interecordid: interR.id}, config.secret)
-  interR.description = 'Vacunado'
+  let token = await utils.signToken({intrecid: interecord.id}, config.secret)
+  interecord.description = 'Changed'
   let options = {
-    uri: `${url}/updateInterecord`,
+    method: 'POST',
+    uri: `${url}/update`,
     json: true,
     body: {
-      description: interR.description,
-      medicineId: interR.medicineId,
-      appointid: interR.appointid
+      id: interecord.id,
+      medicineId: interecord.medicineId,
+      description: interecord.description,
+      internid: interecord.internid
     },
     headers: {
       'Authorization': `Bearer ${token}`
     },
-    ResolveWithFullResponse: true
+    resolveWithFullResponse: true
   }
-  let response = request(options)
+  let response = await request(options)
 
-  t.deepEqual(response.body, interR)
+  t.deepEqual(response.body, interecord)
   t.is(response.statusCode, 201)
 })

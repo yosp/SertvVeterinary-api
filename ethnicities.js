@@ -16,38 +16,38 @@ if (env === 'test') {
 
 const hash = HttpHash()
 
-hash.set('GET /:petid', async function getIntern (req, res, param) {
-  let petid = param.petid
+hash.set('GET /:ethniid', async function getEthni (req, res, param) {
+  let ethniid = param.ethniid
   await db.connect()
-  let intern = await db.getInternment(petid)
+  let ethni = await db.getEthnicities(ethniid)
   await db.disconnect()
-  send(res, 200, intern)
+  send(res, 200, ethni)
 })
 
-hash.set('POST /', async function saveIntern (req, res, param) {
-  let intern = await json(req)
+hash.set('POST /', async function saveEthni (req, res, param) {
+  let ethni = await json(req)
   await db.connect()
-  let created = await db.saveInternment(intern)
+  let created = await db.saveEthnicities(ethni)
   await db.disconnect()
   send(res, 201, created)
 })
 
-hash.set('POST /update', async function updateIntern (req, res, param) {
-	let intern = await json(req)
-	try{
-		let token = await utils.extractToken(req)
-		let encode = await utils.verifyToken(token, config.secret)
-		if ( encode && encode.internid !==intern.id) {
-			throw new Error('invalid Token')
-		}
-	} catch (e) {
-		send(res, 401, {message: 'invalid token'})
-	}
+hash.set('POST /update', async function updateEthni (req, res, param) {
+  let ethni = await json(req)
+  try{
+    let token = await utils.extractToken(req)
+    let encode = await utils.verifyToken(token, config.secret)
+    if ( encode && encode.intrecid !== ethni.id) {
+      throw new Error('invalid Token')
+    }
+  } catch (e) {
+    send(res, 401, {message: 'invalid token'})
+  }
 
-	await db.connect()
-	let updated = await db.updateInternment(intern)
-	await db.disconnect()
-	send(res, 201, updated)
+  await db.connect()
+  let updated = await db.updateEthnicities(ethni)
+  await db.disconnect()
+  send(res, 201, updated)
 })
 
 export default async function main (req, res) {

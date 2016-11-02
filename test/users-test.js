@@ -15,7 +15,6 @@ test.beforeEach(async t => {
 test('POST /', async t => {
   let user = fixtures.getUser()
   let url = t.context.url
-  let token = await utils.signToken({userId: user.id}, config.secret)
 
   let options = {
     method: 'POST',
@@ -27,9 +26,6 @@ test('POST /', async t => {
       fullname: user.fullname,
       password: user.password,
       email: user.email
-    },
-    headers: {
-      'Authorization': `Bearer ${token}`
     },
     resolveWithFullResponse: true
   }

@@ -35,7 +35,14 @@ export default {
       id: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
       description: 'Vacuna para tratar la fiebre',
       medicineId: 21212,
-      appointid: '4d5c-acb5-944a3c1fb407'
+      internid: '4d5c-acb5-944a3c1fb407'
+    }
+  },
+
+  getEthni () {
+    return {
+      id: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
+      description: 'Dog'
     }
   }
 }

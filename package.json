@@ -14,7 +14,8 @@
     "/client.js",
     "/auth.js",
     "/internment.js",
-    "/interecord.js"
+    "/interecord.js",
+    "/ethnicities.js"
     ],
     "parser": "babel-eslint"
   },

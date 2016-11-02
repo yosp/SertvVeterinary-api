@@ -70,4 +70,33 @@ export default class Db {
   authenticate () {
     return Promise.resolve(true)
   }
+
+  getInterecord () {
+    return Promise.resolve(fixtures.getInteRecord())
+  }
+
+  saveInterecord () {
+    let inter = fixtures.getInteRecord()
+    return Promise.resolve(inter)
+  }
+
+  updateInterecord () {
+    let interecord = fixtures.getInteRecord()
+    interecord.description = 'Changed'
+    return Promise.resolve(interecord)
+  }
+
+  getEthnicities () {
+    return Promise.resolve(fixtures.getEthni())
+  }
+
+  saveEthnicities () {
+    return Promise.resolve(fixtures.getEthni())
+  }
+
+  updateEthnicities () {
+    let ethni = fixtures.getEthni()
+    ethni.description = 'Dog 2'
+    return Promise.resolve(ethni)
+  }
 }

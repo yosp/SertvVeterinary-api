@@ -49,17 +49,6 @@ hash.set('GET /byEmail/:email', async function getClientByEmail (req, res, param
 
 hash.set('POST /', async function saveClient (req, res, param) {
   let client = await json(req)
-
-  try {
-    let token = await utils.extractToken(req) 
-    let encode = await utils.verifyToken(token, config.secret)
-    if (encode && encode.clientId != client.id) {
-        throw new Error('invalid Token')
-    }
-  } catch (e) {
-    send(res, 401, {message: 'invalid Token'})
-  }
-
   await db.connect
   let created = await db.saveClient(client)
   await db.disconnect()

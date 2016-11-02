@@ -16,45 +16,46 @@ if (env === 'test') {
 
 const hash = HttpHash()
 
-hash.set('GET /', async function getInteRecord (req, res, params) {
+hash.set('GET /:internid', async function getIntern (req, res, param) {
+  let internid = param.internid
   await db.connect()
-  let interecord = await db.getInterecord()
+  let intern = await db.getInterecord(internid)
   await db.disconnect()
-  send(res, 200, interecord)
+  send(res, 200, intern)
 })
 
-hash.set('POST /', async function saveInteRecord (req, res, params) {
-  let interecord = json(req)
+hash.set('POST /', async function saveIntern (req, res, param) {
+  let interecord = await json(req)
   try {
+    let token = await utils.extractToken(req) 
+    let encode = await utils.verifyToken(token, config.secret)
+    if (encode && encode.intrecid !== interecord.id) {
+      throw new Error('invalid Token')
+    }
+  } catch (e) {
+    send(res, 401, {message: 'invalid Token'})
+  }
+
+  await db.connect()
+  let created = await db.saveInterecord(interecord)
+  await db.disconnect()
+  send(res, 201, created)
+})
+
+hash.set('POST /update', async function updateIntern (req, res, param) {
+  let interecord = await json(req)
+  try{
     let token = await utils.extractToken(req)
-    let encode = await utils.verifyToken(token, secret)
-    if (encode && encode.interecordid !== interecord.id) {
-      throw new Error ('invalid Token')
+    let encode = await utils.verifyToken(token, config.secret)
+    if ( encode && encode.intrecid !== interecord.id) {
+      throw new Error('invalid Token')
     }
   } catch (e) {
     send(res, 401, {message: 'invalid token'})
   }
 
   await db.connect()
-  let saved = db.saveInterecord(interecord)
-  await db.disconnect()
-  send(res, 201, saved)
-})
-
-hash.set('POST /updateInterecord', async function saveInteRecord (req, res, params) {
-  let interecord = json(req)
-  try {
-    let token = await utils.extractToken(req)
-    let encode = await utils.verifyToken(token, secret)
-    if (encode && encode.interecordid !== interecord.id) {
-      throw new Error ('invalid Token')
-    }
-  } catch (e) {
-    send(res, 401, {message: 'invalid token'})
-  }
-
-  await db.connect()
-  let updated = db.updateInterecord(interecord)
+  let updated = await db.updateInterecord(interecord)
   await db.disconnect()
   send(res, 201, updated)
 })

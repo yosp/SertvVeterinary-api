@@ -43,7 +43,6 @@ test('GET /client:email', async t => {
 test('POST /createClient', async t => {
   let client = fixtures.getClients()
   let url = t.context.url
-  let token = await utils.signToken({clientId: client.id}, config.secret)
 
   let options = {
     method: 'POST',
@@ -57,9 +56,6 @@ test('POST /createClient', async t => {
       email: client.email,
       phone: client.phone,
       phone2: client.phone2
-    },
-    headers: {
-      'Authorization': `Bearer ${token}`
     },
     resolveWithFullResponse: true
 

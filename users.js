@@ -19,17 +19,6 @@ const hash = HttpHash()
 
 hash.set('POST /', async function saveUser (req, res, params) {
   let user = await json(req)
-
-  try {
-    let token = await utils.extractToken(req)
-    let encode = await utils.verifyToken(token, config.secret)
-    if (encode && encode.userId !== user.id) {
-      throw new Error('invalid Token')
-    }
-  } catch (e) {
-    send(res, 401, {message: 'invalid Token'})
-  }
-
   await db.connect()
   let created = await db.saveNewUser(user)
   await db.disconnect()
