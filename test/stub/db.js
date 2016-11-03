@@ -143,4 +143,19 @@ export default class Db {
   savePetImage () {
     return Promise.resolve(fixtures.getPetImg())
   }
+
+  getMedicineByLab () {
+    return Promise.resolve(fixtures.getMedicine())
+  }
+
+  saveMedicine () {
+    return Promise.resolve(fixtures.getMedicine())
+  }
+
+  updateMedicine () {
+    let med = fixtures.getMedicine()
+    med.description = 'Medicine y'
+    return Promise.resolve(med)
+  }
+
 }

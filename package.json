@@ -18,7 +18,8 @@
     "/ethnicities.js",
     "/laboratory.js",
     "/race.js",
-    "/pet.js"
+    "/pet.js",
+    "/medicine.js"
     ],
     "parser": "babel-eslint"
   },

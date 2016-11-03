@@ -79,5 +79,13 @@ export default {
       petid: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
       url: 'https://www.google.com.do/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwijrsaeuIvQAhWJ34MKHUlVDm4QjRwIBw&url=http%3A%2F%2Fwww.boredpanda.es%2Finstagram-perros-husky-siberiano-erica-tcogoeva%2F&psig=AFQjCNEOwDgm-jCSqRQgWt8YMObeknqdTQ&ust=1478223038197704'
     }
+  },
+
+  getMedicine () {
+    return {
+      id: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
+      labid: '232121-1212',
+      description: 'Pulgoso'
+    }
   }
 }
