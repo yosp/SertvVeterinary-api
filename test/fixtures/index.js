@@ -51,5 +51,33 @@ export default {
       id: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
       description: 'lab X'
     }
+  },
+
+  getRace () {
+    return {
+      id: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
+      description: 'Husky',
+      ethniid: '6a238b19-3ee3-4d5c'
+    }
+  },
+
+  getPet () {
+    return {
+      id: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
+      fullname: 'Eli Segura',
+      sex: 'H',
+      color: 'Blanco, Gris, Negro',
+      borndate: '01/25/2015',
+      weight: '45',
+      alive: true
+    }
+  },
+
+  getPetImg () {
+    return {
+      id: '232121-1212',
+      petid: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
+      url: 'https://www.google.com.do/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwijrsaeuIvQAhWJ34MKHUlVDm4QjRwIBw&url=http%3A%2F%2Fwww.boredpanda.es%2Finstagram-perros-husky-siberiano-erica-tcogoeva%2F&psig=AFQjCNEOwDgm-jCSqRQgWt8YMObeknqdTQ&ust=1478223038197704'
+    }
   }
 }

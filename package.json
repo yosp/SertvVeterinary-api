@@ -16,7 +16,9 @@
     "/internment.js",
     "/interecord.js",
     "/ethnicities.js",
-    "/laboratory.js"
+    "/laboratory.js",
+    "/race.js",
+    "/pet.js"
     ],
     "parser": "babel-eslint"
   },

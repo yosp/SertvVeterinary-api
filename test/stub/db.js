@@ -113,4 +113,34 @@ export default class Db {
   getLaboratorys () {
     return Promise.resolve(fixtures.getLab())
   }
+
+  getRaceByEthni () {
+    return Promise.resolve(fixtures.getRace())
+  }
+
+  updateRace () {
+    let rac = fixtures.getRace()
+    rac.description = 'Husky 2'
+    return Promise.resolve(rac)
+  }
+
+  saveRace () {
+    return Promise.resolve(fixtures.getRace())
+  }
+
+  getPetsByClient () {
+    return Promise.resolve(fixtures.getPet())
+  }
+
+  getPetImages () {
+    return Promise.resolve(fixtures.getPetImg())
+  }
+
+  savePet () {
+    return Promise.resolve(fixtures.getPet())
+  }
+
+  savePetImage () {
+    return Promise.resolve(fixtures.getPetImg())
+  }
 }
