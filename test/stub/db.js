@@ -175,4 +175,18 @@ export default class Db {
     ap.description = 'Vacunacion antirabico'
     return Promise.resolve(ap)
   }
+
+  saveApRecord (sa) {
+    return Promise.resolve(fixtures.getAprecord())
+  }
+
+  getApRecord (sa) {
+    return Promise.resolve(fixtures.getAprecord())
+  }
+
+  updateApRecord (sa) {
+    let ap = fixtures.getAprecord()
+    ap.note = 'Good Job'
+    return Promise.resolve(ap)
+  }
 }

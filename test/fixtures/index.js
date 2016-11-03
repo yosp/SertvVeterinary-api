@@ -95,5 +95,14 @@ export default {
       appointmentDate: '07/24/2015',
       status: 'A'
     }
+  },
+
+  getAprecord () {
+    return {
+      id: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
+      apId: '232121-1212',
+      medicineId: '54654sa5s46a54-a5s4a-as654adassdas45',
+      note: 'Blablablablablablablabla'
+    }
   }
 }

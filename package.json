@@ -20,7 +20,8 @@
     "/race.js",
     "/pet.js",
     "/medicine.js",
-    "/appointment.js"
+    "/appointment.js",
+    "/aprecord.js"
     ],
     "parser": "babel-eslint"
   },

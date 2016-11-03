@@ -16,35 +16,28 @@ if (env === 'test') {
 
 const hash = HttpHash()
 
-hash.set('GET /', async function getMedicine (req, res, param) {
+hash.set('GET /:apid', async function getAprecord (req, res, param) {
+  let apid = param.apid
   await db.connect()
-  let appoint = await db.getAppointments()
-  await db.disconnect()
-  send(res, 200, appoint)
-})
-
-hash.set('GET /:petid', async function getMedicine (req, res, param) {
-  let petid = param.petid
-  await db.connect()
-  let appoint = await db.getAppointmentByPet(petid)
+  let appoint = await db.getApRecord(apid)
   await db.disconnect()
   send(res, 200, petid)
 })
 
-hash.set('POST /', async function saveMedicine (req, res, param) {
-  let appoint = await json(req)
+hash.set('POST /', async function saveAprecord (req, res, param) {
+  let aprec = await json(req)
   await db.connect()
-  let created = await db.saveAppointment(appoint)
+  let created = await db.saveApRecord(aprec)
   await db.disconnect()
   send(res, 201, created)
 })
 
-hash.set('POST /update', async function updateLab (req, res, param) {
-	let appoint = await json(req)
+hash.set('POST /update', async function updateAprecord (req, res, param) {
+	let aprec = await json(req)
 	try{
 		let token = await utils.extractToken(req)
 		let encode = await utils.verifyToken(token, config.secret)
-		if ( encode && encode.apid !== appoint.id) {
+		if ( encode && encode.apid !== aprec.id) {
 			throw new Error('invalid Token')
 		}
 	} catch (e) {
@@ -52,7 +45,7 @@ hash.set('POST /update', async function updateLab (req, res, param) {
 	}
 
 	await db.connect()
-	let updated = await db.updateAppointment(appoint)
+	let updated = await db.updateApRecord(aprec)
 	await db.disconnect()
 	send(res, 201, updated)
 })
