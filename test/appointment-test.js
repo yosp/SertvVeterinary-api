@@ -35,6 +35,7 @@ test('POST /', async t => {
     json: true,
     body: {
       id: appoint.id,
+      petid: appoint.petid,
       appointmentDate: appoint.appointmentDate,
       status: appoint.status
     },
@@ -58,6 +59,7 @@ test('POST /update', async t => {
     json: true,
     body: {
       id: appoint.id,
+      petid: appoint.petid,
       appointmentDate: appoint.appointmentDate,
       status: appoint.status
     },

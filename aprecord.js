@@ -19,9 +19,9 @@ const hash = HttpHash()
 hash.set('GET /:apid', async function getAprecord (req, res, param) {
   let apid = param.apid
   await db.connect()
-  let appoint = await db.getApRecord(apid)
+  let aprec = await db.getApRecord(apid)
   await db.disconnect()
-  send(res, 200, petid)
+  send(res, 200, aprec)
 })
 
 hash.set('POST /', async function saveAprecord (req, res, param) {
@@ -37,7 +37,7 @@ hash.set('POST /update', async function updateAprecord (req, res, param) {
 	try{
 		let token = await utils.extractToken(req)
 		let encode = await utils.verifyToken(token, config.secret)
-		if ( encode && encode.apid !== aprec.id) {
+		if ( encode && encode.aprid !== aprec.id) {
 			throw new Error('invalid Token')
 		}
 	} catch (e) {

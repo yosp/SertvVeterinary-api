@@ -28,7 +28,7 @@ test('POST /', async t => {
     json: true,
     body: {
       id: aprec.id,
-      apId: aprec.apId,
+      apid: aprec.apid,
       medicineId: aprec.medicineId,
       note: aprec.note
     },
@@ -44,7 +44,7 @@ test('POST /', async t => {
 test('POST /update', async t => {
   let aprec = fixtures.getAprecord()
   let url = t.context.url
-  let token = await utils.signToken({apid: aprec.apid}, config.secret)
+  let token = await utils.signToken({aprid: aprec.id}, config.secret)
   aprec.note = 'Good Job'
   let options = {
     method: 'POST',
@@ -52,7 +52,7 @@ test('POST /update', async t => {
     json: true,
     body: {
       id: aprec.id,
-      apId: aprec.apId,
+      apid: aprec.apid,
       medicineId: aprec.medicineId,
       note: aprec.note
     },

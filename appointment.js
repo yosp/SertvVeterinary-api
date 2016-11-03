@@ -28,7 +28,7 @@ hash.set('GET /:petid', async function getMedicine (req, res, param) {
   await db.connect()
   let appoint = await db.getAppointmentByPet(petid)
   await db.disconnect()
-  send(res, 200, petid)
+  send(res, 200, appoint)
 })
 
 hash.set('POST /', async function saveMedicine (req, res, param) {
