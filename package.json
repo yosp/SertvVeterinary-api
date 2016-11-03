@@ -19,7 +19,8 @@
     "/laboratory.js",
     "/race.js",
     "/pet.js",
-    "/medicine.js"
+    "/medicine.js",
+    "/appointment.js"
     ],
     "parser": "babel-eslint"
   },

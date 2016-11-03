@@ -158,4 +158,21 @@ export default class Db {
     return Promise.resolve(med)
   }
 
+  getAppointments () {
+    return Promise.resolve(fixtures.getAppoint())
+  }
+
+  getAppointmentByPet (pet) {
+    return Promise.resolve(fixtures.getAppoint())
+  }
+
+  saveAppointment (apoint) {
+    return Promise.resolve(fixtures.getAppoint())
+  }
+
+  updateAppointment (appoint) {
+    let ap = fixtures.getAppoint()
+    ap.description = 'Vacunacion antirabico'
+    return Promise.resolve(ap)
+  }
 }

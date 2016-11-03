@@ -87,5 +87,13 @@ export default {
       labid: '232121-1212',
       description: 'Pulgoso'
     }
+  },
+
+  getAppoint () {
+    return {
+      description: 'Vacunacion de parasitos',
+      appointmentDate: '07/24/2015',
+      status: 'A'
+    }
   }
 }
