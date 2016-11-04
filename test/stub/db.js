@@ -203,4 +203,22 @@ export default class Db {
   getProducts () {
     return Promise.resolve(fixtures.getProducts())
   }
+
+  getBill () {
+    return Promise.resolve(fixtures.bills())
+  }
+
+  getBillByDate () {
+    return Promise.resolve(fixtures.bills())
+  }
+
+  saveBills () {
+    return Promise.resolve(fixtures.bills())
+  }
+
+  updateBill () {
+    let bl = fixtures.bills()
+    bl.note = 'Naaa'
+    return Promise.resolve(bl)
+  }
 }
