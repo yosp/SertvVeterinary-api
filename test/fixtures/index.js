@@ -125,5 +125,15 @@ export default {
       note: 'Yeahhhh',
       cratedAt: '01-01-2016'
     }
+  },
+
+  billDetail () {
+    return {
+      id: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
+      productId: '654sda55a4s-5a4as5a5x2',
+      amount: 4,
+      unitPrice: 20,
+      subPrice: 80
+    }
   }
 }

@@ -23,7 +23,8 @@
     "/appointment.js",
     "/aprecord.js",
     "/products.js",
-    "/bills.js"
+    "/bills.js",
+    "/billdetail.js"
     ],
     "parser": "babel-eslint"
   },

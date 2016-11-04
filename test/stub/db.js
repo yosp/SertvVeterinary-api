@@ -221,4 +221,18 @@ export default class Db {
     bl.note = 'Naaa'
     return Promise.resolve(bl)
   }
+
+  getBillDetail () {
+    return Promise.resolve(fixtures.billDetail())
+  }
+
+  saveBillDetail () {
+    return Promise.resolve(fixtures.billDetail())
+  }
+
+  updateBillDatail () {
+    let bld = fixtures.billDetail()
+    bld.unitPrice = '10'
+    return Promise.resolve(bld)
+  }
 }
