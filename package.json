@@ -21,7 +21,8 @@
     "/pet.js",
     "/medicine.js",
     "/appointment.js",
-    "/aprecord.js"
+    "/aprecord.js",
+    "/products.js"
     ],
     "parser": "babel-eslint"
   },

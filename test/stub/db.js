@@ -189,4 +189,18 @@ export default class Db {
     ap.note = 'Good Job'
     return Promise.resolve(ap)
   }
+
+  saveProduct () {
+    return Promise.resolve(fixtures.getProducts())
+  }
+
+  updateProducts () {
+    let pr = fixtures.getProducts()
+    pr.cost = 30
+    return Promise.resolve(pr)
+  }
+
+  getProducts () {
+    return Promise.resolve(fixtures.getProducts())
+  }
 }
