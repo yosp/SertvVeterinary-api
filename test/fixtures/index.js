@@ -108,7 +108,7 @@ export default {
     }
   },
 
-  getProduct () {
+  getProducts () {
     return {
       id: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
       description: 'Bonabid',

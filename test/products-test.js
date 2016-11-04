@@ -13,14 +13,14 @@ test.beforeEach(async t => {
 })
 
 test('GET /:product', async t => {
-  let pr = fixtures.getProduct()
+  let pr = fixtures.getProducts()
   let url = t.context.url
   let body = await request({uri: `${url}/${pr.description}`, json: true})
   t.deepEqual(body, pr)
 })
 
 test('POST /', async t => {
-  let pr = fixtures.getProduct()
+  let pr = fixtures.getProducts()
   let url = t.context.url
   let options = {
     method: 'POST',
@@ -43,7 +43,7 @@ test('POST /', async t => {
 })
 
 test('POST /update', async t => {
-  let pr = fixtures.getProduct()
+  let pr = fixtures.getProducts()
   let url = t.context.url
   let token = await utils.signToken({prodid: pr.id}, config.secret)
   pr.cost = 30
