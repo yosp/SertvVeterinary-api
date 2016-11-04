@@ -5,9 +5,21 @@
   "scripts": {
     "lint": "standard",
     "test": "npm run lint && NODE_ENV=test ava --require babel-register test/**-test.js",
-    "pictures": "micro -p 5000 pictures.js",
+    "client": "micro -p 5000 client.js",
     "users": "micro -p 5001 users.js",
-    "auth": "micro -p 5002 auth.js"
+    "auth": "micro -p 5002 auth.js",
+    "appointment": "micro -p 5003 appointment.js",
+    "aprecord": "micro -p 5004 aprecord.js",
+    "billdetail": "micro -p 5005 billdetail.js",
+    "bills": "micro -p 5006 bills.js",
+    "ethnicities": "micro -p 5007 ethnicities.js",
+    "interecord": "micro -p 5008 interecord.js",
+    "internment": "micro -p 5009 internment.js",
+    "laboratory": "micro -p 5010 laboratory.js",
+    "medicine": "micro -p 5011 medicine.js",
+    "race": "micro -p 5012 race.js",
+    "pet": "micro -p 5013 pet.js",
+    "products": "micro -p 5014 products.js"
   },
   "standard": {
     "ignore": [
