@@ -114,6 +114,10 @@ export default class Db {
     return Promise.resolve(fixtures.getLab())
   }
 
+  getLaboratoryById () {
+    return Promise.resolve(fixtures.getLab())
+  }
+
   getRaceByEthni () {
     return Promise.resolve(fixtures.getRace())
   }

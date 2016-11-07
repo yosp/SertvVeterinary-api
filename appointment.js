@@ -16,14 +16,14 @@ if (env === 'test') {
 
 const hash = HttpHash()
 
-hash.set('GET /', async function getMedicine (req, res, param) {
+hash.set('GET /', async function getAppointment (req, res, param) {
   await db.connect()
   let appoint = await db.getAppointments()
   await db.disconnect()
   send(res, 200, appoint)
 })
 
-hash.set('GET /:petid', async function getMedicine (req, res, param) {
+hash.set('GET /:petid', async function getAppointmentByPet (req, res, param) {
   let petid = param.petid
   await db.connect()
   let appoint = await db.getAppointmentByPet(petid)
@@ -31,7 +31,7 @@ hash.set('GET /:petid', async function getMedicine (req, res, param) {
   send(res, 200, appoint)
 })
 
-hash.set('POST /', async function saveMedicine (req, res, param) {
+hash.set('POST /', async function saveAppointment (req, res, param) {
   let appoint = await json(req)
   await db.connect()
   let created = await db.saveAppointment(appoint)
@@ -39,7 +39,7 @@ hash.set('POST /', async function saveMedicine (req, res, param) {
   send(res, 201, created)
 })
 
-hash.set('POST /update', async function updateLab (req, res, param) {
+hash.set('POST /update', async function updateAppointment (req, res, param) {
 	let appoint = await json(req)
 	try{
 		let token = await utils.extractToken(req)
