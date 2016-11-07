@@ -16,13 +16,22 @@ if (env === 'test') {
 
 const hash = HttpHash()
 
-hash.set('GET /:labid', async function getLab (req, res, param) {
+hash.set('GET /', async function getLab (req, res, param) {
   let labid = param.labid
   await db.connect()
-  let lab = await db.getLaboratorys(labid)
+  let lab = await db.getLaboratorys()
   await db.disconnect()
   send(res, 200, lab)
 })
+
+hash.set('GET /:labid', async function getLab (req, res, param) {
+  let labid = param.labid
+  await db.connect()
+  let lab = await db.getLaboratoryById(labid)
+  await db.disconnect()
+  send(res, 200, lab)
+})
+
 
 hash.set('POST /', async function saveLab (req, res, param) {
   let lab = await json(req)

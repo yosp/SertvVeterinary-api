@@ -19,6 +19,13 @@ test('GET /:labid', async t => {
   t.deepEqual(body, lab)
 })
 
+test('GET /', async t => {
+  let lab = fixtures.getLab()
+  let url = t.context.url
+  let body = await request({uri: `${url}/`, json: true})
+  t.deepEqual(body, lab)
+})
+
 test('POST /', async t => {
   let lab = fixtures.getLab()
   let url = t.context.url
