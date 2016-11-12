@@ -234,7 +234,7 @@ export default class Db {
     return Promise.resolve(fixtures.billDetail())
   }
 
-  updateBillDatail () {
+  updateBillDetail () {
     let bld = fixtures.billDetail()
     bld.unitPrice = '10'
     return Promise.resolve(bld)

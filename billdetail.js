@@ -45,7 +45,7 @@ hash.set('POST /update', async function updateBillDetail (req, res, param) {
 	}
 
 	await db.connect()
-	let updated = await db.updateBillDatail(bld)
+	let updated = await db.updateBillDetail(bld)
 	await db.disconnect()
 	send(res, 201, updated)
 })
