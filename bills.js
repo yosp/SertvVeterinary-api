@@ -24,10 +24,13 @@ hash.set('GET /:billid', async function getBill (req, res, param) {
   send(res, 200, bl)
 })
 
-hash.set('GET /byDate/:bdate', async function GetBillByDate (req, res, param) {
-  let bdate = param.bdate
+hash.set('POST /byDate', async function GetBillByDate (req, res, param) {
+  let dates = await json(req)
+  let dateA = new Date(dates.dateA)
+  let dateB = new Date(dates.dateB)
+
   await db.connect()
-  let bl = await db.getBillByDate(bdate)
+  let bl = await db.getBillByDate(dateA, dateB)
   await db.disconnect()
   send(res, 200, bl)
 })

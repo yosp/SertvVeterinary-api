@@ -123,7 +123,7 @@ export default {
       id: '6a238b19-3ee3-4d5c-acb5-944a3c1f',
       client: 'as23w2-23222',
       note: 'Yeahhhh',
-      cratedAt: '01-01-2016'
+      createdAt: '01-01-2016'
     }
   },
 

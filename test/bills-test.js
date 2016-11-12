@@ -19,11 +19,23 @@ test('GET /:billid', async t => {
   t.deepEqual(body, bl)
 })
 
-test('GET /byDate/:bdate', async t => {
+test('GET /byDate/', async t => {
   let bl = fixtures.bills()
+  let dates = {
+    dateA: '11/01/2016',
+    dateB: '11/30/2016'
+  }
+
   let url = t.context.url
-  let body = await request({uri: `${url}/byDate/${bl.createAt}`, json: true})
-  t.deepEqual(body, bl)
+  let options = {
+    method: 'POST',
+    uri: `${url}/byDate/`,
+    body: dates,
+    resolveWithFullResponse: true,
+    json: true
+  }
+  let reg = await request(options)
+  t.deepEqual(reg.body, bl)
 })
 
 test('POST /', async t => {
