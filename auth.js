@@ -20,7 +20,7 @@ hash.set('POST /', async function authenticate (req, res, param) {
   let credentials = await json(req)
   await db.connect()
   let auth = await db.authenticate(credentials.username, credentials.password)
-
+  await db.disconnect()
   if (!auth) {
     return send(res, 401, {error: 'invelid credentials'})
   }
