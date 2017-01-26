@@ -16,7 +16,7 @@ if (env === 'test') {
 
 const hash = HttpHash()
 
-hash.set('GET /clientList', async function getClients (req, res, param) {
+hash.set('GET /', async function getClients (req, res, param) {
   await db.connect()
   let clients = await db.getClientList()
   await db.disconnect()
@@ -49,7 +49,7 @@ hash.set('GET /byEmail/:email', async function getClientByEmail (req, res, param
 
 hash.set('POST /', async function saveClient (req, res, param) {
   let client = await json(req)
-  await db.connect
+  await db.connect()
   let created = await db.saveClient(client)
   await db.disconnect()
   send(res, 201, created)
@@ -58,17 +58,7 @@ hash.set('POST /', async function saveClient (req, res, param) {
 hash.set('POST /updateClient', async function updateClient (req, res, param) {
   let client = await json(req)
 
-  try {
-    let token = await utils.extractToken(req)
-    let enconde = await utils.verifyToken(token, config.secret)
-    if (enconde && enconde.clientId != client.id) {
-      throw new Error('invalid Token')
-    }
-  } catch (e) {
-    send(res, 401, {message: 'invalid Token'})
-  }
-
-  await db.connect
+  await db.connect()
   let updated = await db.updateClient(client)
   await db.disconnect()
   send(res, 201, updated)

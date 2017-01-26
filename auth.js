@@ -18,6 +18,7 @@ const hash = HttpHash()
 
 hash.set('POST /', async function authenticate (req, res, param) {
   let credentials = await json(req)
+
   await db.connect()
   let auth = await db.authenticate(credentials.username, credentials.password)
   await db.disconnect()
