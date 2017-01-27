@@ -16,10 +16,9 @@ if (env === 'test') {
 
 const hash = HttpHash()
 
-hash.set('GET /:ethniid', async function getEthni (req, res, param) {
-  let ethniid = param.ethniid
+hash.set('GET /', async function getEthni (req, res, param) {
   await db.connect()
-  let ethni = await db.getEthnicities(ethniid)
+  let ethni = await db.getEthnicities()
   await db.disconnect()
   send(res, 200, ethni)
 })
@@ -37,7 +36,7 @@ hash.set('POST /update', async function updateEthni (req, res, param) {
   try{
     let token = await utils.extractToken(req)
     let encode = await utils.verifyToken(token, config.secret)
-    if ( encode && encode.intrecid !== ethni.id) {
+    if ( encode && encode.ethniid !== ethni.id) {
       throw new Error('invalid Token')
     }
   } catch (e) {
