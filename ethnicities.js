@@ -33,16 +33,6 @@ hash.set('POST /', async function saveEthni (req, res, param) {
 
 hash.set('POST /update', async function updateEthni (req, res, param) {
   let ethni = await json(req)
-  try{
-    let token = await utils.extractToken(req)
-    let encode = await utils.verifyToken(token, config.secret)
-    if ( encode && encode.ethniid !== ethni.id) {
-      throw new Error('invalid Token')
-    }
-  } catch (e) {
-    send(res, 401, {message: 'invalid token'})
-  }
-
   await db.connect()
   let updated = await db.updateEthnicities(ethni)
   await db.disconnect()

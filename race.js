@@ -34,16 +34,7 @@ hash.set('POST /', async function saveLab (req, res, param) {
 
 hash.set('POST /update', async function updateLab (req, res, param) {
 	let race = await json(req)
-	try{
-		let token = await utils.extractToken(req)
-		let encode = await utils.verifyToken(token, config.secret)
-		if ( encode && encode.raceid !== race.id) {
-			throw new Error('invalid Token')
-		}
-	} catch (e) {
-		send(res, 401, {message: 'invalid token'})
-	}
-
+  
 	await db.connect()
 	let updated = await db.updateRace(race)
 	await db.disconnect()
